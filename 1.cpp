@@ -2,6 +2,8 @@
 #include <string>
 #include <cmath>
 #include <iomanip>
+#include <bitset>
+#include <vector>
 using namespace std;
 
 
@@ -72,35 +74,79 @@ int find_prime(int n){
     return i-1;
 }
 
+string str_to_bin(const string s){
+    string binaryString;
+    for(char c: s){
+
+        binaryString+=std::bitset<8>(c).to_string();
+    }
+    return binaryString;
+        
+
+        
+    }
+ 
 
 int main(){
 
     unsigned long s=gen_cbrt(3);
        
 
-    unsigned long sqrt[8];
-
-
+    unsigned long squares[8];
+    unsigned long cubes[64];
+    string test = "hihi";
+    
+    
     for (int i=0;i<8;i++){
         
 
-        unsigned long sqrt[i] = {gen_buffer(find_prime(i))};
+        squares[i] = {gen_buffer(find_prime(i))};
 
         
     }
-        
-        
-        //std::   cout << "0x" << std::hex << s <<"\n";
+    
+    for (int i=0;i<64;i++){
         
 
-    for(int i=0; i<8; i++){
+        cubes[i] = {gen_cbrt(find_prime(i))};
 
         
-        cout << sqrt[i] << endl;
+        
+    }
+     
+    string pad= str_to_bin(test);
+    int len= pad.size();
+    int block_num=(len/512)+1;
+    int k= (block_num*512)-1-len-64;
+    string padding[block_num*512];
+    for(int i=0;i<len;i++){
+        padding[i]=pad[i];
+    }
+    
+
+
+    padding[len+1]="1"; 
+    for(int i=len+2; i<=447;i++){
+        padding[i]="0";
+
+    }
+    
+    string lpad;
+    lpad+=std::bitset<64>(len).to_string();
+    for(int i=0;i<64;i++){
+        padding[447+i]=lpad[i];
+    }
+    for(int i=0;i<512;i++){
+        cout<<padding[i];
+    }
+   
+    vector<string> blocks;
+    for(int i=0;i<block_num;i++){
+        string block=padding.substr())
     }
 
-   // cout << find_prime(4);
-
-
+    
+    
     return 0;
+    
 }
