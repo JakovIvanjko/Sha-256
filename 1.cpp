@@ -85,6 +85,7 @@ string str_to_bin(const string s){
 
         
     }
+
  
 
 int main(){
@@ -94,8 +95,7 @@ int main(){
 
     unsigned long squares[8];
     unsigned long cubes[64];
-    string test = "hihi";
-    
+    string test="Whether we wanted it or not, we've stepped into a war with the Cabal on Mars. So let's get to taking out their command, one by one. Valus Ta'aurc. From what I can gather, he commands the Siege Dancers from an Imperial Land Tank just outside of Rubicon. He's well protected, but with the right team, we can punch through those defenses, take this beast out, and break their grip on Freehold."; 
     
     for (int i=0;i<8;i++){
         
@@ -118,32 +118,50 @@ int main(){
     int len= pad.size();
     int block_num=(len/512)+1;
     int k= (block_num*512)-1-len-64;
-    string padding[block_num*512];
+    string padding;
     for(int i=0;i<len;i++){
-        padding[i]=pad[i];
+        padding+=pad[i];
     }
     
 
 
-    padding[len+1]="1"; 
-    for(int i=len+2; i<=447;i++){
-        padding[i]="0";
+    padding+="1"; 
+    
+    int koef=padding.size();
+    while (koef<block_num*512-64){
+        padding+="0";
+        koef++;
 
     }
     
     string lpad;
     lpad+=std::bitset<64>(len).to_string();
     for(int i=0;i<64;i++){
-        padding[447+i]=lpad[i];
+        padding+=lpad[i];
     }
-    for(int i=0;i<512;i++){
+    /*for(int i=0;i<512;i++){
         cout<<padding[i];
-    }
+    }*/
    
     vector<string> blocks;
     for(int i=0;i<block_num;i++){
-        string block=padding.substr())
+        string block=padding.substr(i*512,512);
+        blocks.push_back(block);
     }
+   /* for(auto i=blocks.begin();i !=blocks.end();++i){
+        cout<<*i<<endl<<endl;
+        
+
+    }*/
+    int x=0;
+    string w[64];
+    string chunk=blocks[0];
+    cout <<chunk<<endl;
+    for(int j=0;j<16;j++){
+        w[j]=
+
+    }
+
 
     
     
